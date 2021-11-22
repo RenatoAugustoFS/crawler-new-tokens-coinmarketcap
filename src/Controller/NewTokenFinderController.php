@@ -26,9 +26,6 @@ class NewTokenFinderController extends AbstractController
         $this->sendMessage = new SendNotificationTelegram();
     }
 
-    /**
-     * @Route("/", name="finder")
-     */
     public function handle(): Response
     {
         $client = new Client(['base_uri' => 'https://coinmarketcap.com/']);
