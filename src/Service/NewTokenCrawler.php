@@ -23,10 +23,15 @@ class NewTokenCrawler
         $html = $response->getBody();
         $this->crawler->addHtmlContent($html);
         $tokenArray = $this->crawler->filter('p.sc-1eb5slv-0.iworPT')->first();
+
         foreach ($tokenArray as $token) {
             $name = $token->textContent;
         }
 
-        return new NewTokenCMK($name);
+        try {
+            return new NewTokenCMK($name);
+        } catch (\Exception $exception){
+            throw new \RuntimeException("TEMOS ALGUM PROBLEMA COM A URL OU SELETOR");
+        }
     }
 }

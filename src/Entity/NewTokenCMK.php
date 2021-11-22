@@ -26,4 +26,11 @@ class NewTokenCMK
     {
         $this->name = $name;
     }
+
+    public function __toString(): string
+    {
+        $message = "### Novo TOKEN Adicionado ###" . "\n";
+        $message.= "CORRE LÁ CARALHO! => " . $this->name . "\n";
+        return $message;
+    }
 }
