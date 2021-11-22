@@ -28,6 +28,23 @@ class NewTokenFinderController extends AbstractController
 
     public function handle(): Response
     {
-        return $this->render('new_token_finder/index.html.twig', []);
+        $client = new Client(['base_uri' => 'https://coinmarketcap.com/']);
+        $crawler = new Crawler();
+        $tokenFinder = new NewTokenCrawler($client, $crawler);
+
+        try {
+            $token = $tokenFinder->find();
+        } catch (\Exception $e) {
+            $this->sendMessage->sendMessage($e->getMessage());
+            exit();
+        }
+
+        if(!$this->repository->findOneBy(['name' => $token->name])){
+            $this->entityManager->persist($token);
+            $this->entityManager->flush();
+            $this->sendMessage->sendMessage($token);
+        }
+
+        return new Response('', 200);
     }
 }
