@@ -11,7 +11,6 @@ use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class NewTokenFinderController extends AbstractController
 {
